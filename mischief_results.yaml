@@ -1,0 +1,44 @@
+justification: "\n    Our mischief logic uses spatial relationships (distance and\
+  \ IoU) between \n    detected pets and objects. This rule-based approach is interpretable\
+  \ and \n    adjustable - we can easily tune thresholds or add new rules. The logic\
+  \ \n    considers both dangerous scenarios (cat near cup) and safe scenarios \n\
+  \    (dog on couch) to provide context-aware alerts.\n    "
+model: runs/detect/runs/train/pet_mischief_exp/weights/best.pt
+rules:
+  high_risk_conditions:
+  - Pet touching object (IoU > 0.001)
+  - Pet within 80px of dangerous object (cup, vase, laptop, plant)
+  low_risk_conditions:
+  - Pet on couch (resting)
+  - Pet far from all objects
+  medium_risk_conditions:
+  - Pet within 150px of dangerous object
+task: 'Task 4 Part B: Mischief System Evaluation'
+test_results:
+  risk_distribution:
+    HIGH: 5
+    LOW: 4
+    MEDIUM: 0
+  sample_detections:
+  - image: 000000139872.jpg
+    message: Low risk. dog is behaving... for now.
+    reasons: []
+    risk: LOW
+  - image: 000000106235.jpg
+    message: No pets detected. System monitoring.
+    reasons: []
+    risk: LOW
+  - image: 202604210106.jpg
+    message: DANGER! CAT touching cup!
+    reasons:
+    - cat-cup (contact)
+    risk: HIGH
+  - image: 000000184384.jpg
+    message: No pets detected. System monitoring.
+    reasons: []
+    risk: LOW
+  - image: 202604210126.jpg
+    message: Low risk. cat is behaving... for now.
+    reasons: []
+    risk: LOW
+  total_images: 9

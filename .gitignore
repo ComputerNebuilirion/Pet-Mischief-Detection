@@ -1,0 +1,35 @@
+# ========== 数据集（核心） ==========
+coco_raw/
+pet_mischief_yolo/
+datasets/
+data/
+*.zip
+*.tar
+*.tar.gz
+
+# ========== 模型权重 ==========
+*.pt
+*.pth
+*.weights
+*.onnx
+*.engine
+model/
+
+# ========== 训练输出 ==========
+runs/
+output/
+weights/
+*.cache
+
+# ========== 环境/缓存 ==========
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# ========== 图片/结果（可选） ==========
+*.png
+*.jpg
+*.jpeg
+!dataset_samples.png        # 保留示例图（如果你想展示）
+!mischief_detection_results.png
